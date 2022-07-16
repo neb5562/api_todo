@@ -2,4 +2,4 @@
 
 one:
   username: neb123
-  password_digest: 12345678
+  password_digest: <%= BCrypt::Password.create('12345678') %>
