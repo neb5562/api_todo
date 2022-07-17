@@ -17,6 +17,19 @@ class Api::V1::ProjectsController < ApplicationController
     end
   end
 
+  def update
+    if @project.update(project_params)
+      render json: @project
+    else
+      render json: @project.errors, status: :unprocessable_entity 
+    end
+  end
+
+  def destroy
+    @project.destroy
+    render json: { message: "project deleted successfully!"}, head: :no_content
+  end
+
   private
 
   def project_params
