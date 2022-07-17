@@ -1,0 +1,2 @@
+class DenyToken < ApplicationRecord
+end

@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_15_063301) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_17_105912) do
+  create_table "deny_tokens", force: :cascade do |t|
+    t.string "token", null: false
+    t.datetime "expire"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_deny_tokens_on_token", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
     t.string "password_digest", null: false

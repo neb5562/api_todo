@@ -1,5 +1,5 @@
 class Api::V1::TokensController < ApplicationController
-  before_action :set_user, only: [:create]
+  before_action :set_user, only: [:create, :log_out]
 
   def create
     if @user&.authenticate(user_params[:password])
@@ -9,8 +9,11 @@ class Api::V1::TokensController < ApplicationController
     end
   end
 
-  def destroy
-
+  def log_out
+    expire = Time.at(JsonWebToken.decode(request.headers['Authorization'])['exp'])
+    if DenyToken.create(token: JsonWebToken.encode(user_id: @user.id), expire: expire)
+      render json: { message: "log out success!" }, status: :ok
+    end
   end
 
   private
