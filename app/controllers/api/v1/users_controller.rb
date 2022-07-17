@@ -15,19 +15,6 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def update
-    if @user.update(user_params)
-      render json: @user, status: :ok
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @user.destroy
-    head 204
-  end
-
   private
 
   def set_user
@@ -40,6 +27,6 @@ class Api::V1::UsersController < ApplicationController
 
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :password_confirmation)
   end
 end

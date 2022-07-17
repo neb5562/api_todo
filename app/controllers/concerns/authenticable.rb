@@ -3,7 +3,7 @@ module Authenticable
     return @current_user if @current_user
 
     header = request.headers['Authorization']
-    return nil if header.nil?
+    return nil if header.nil? 
 
     decoded = JsonWebToken.decode(header)
 
