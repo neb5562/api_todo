@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :tokens, only: %i[create]
 
       resources :projects, only: %i[show create update destroy] do
-        
+        resources :tasks, only: %i[create]
       end
 
       delete "/tokens", to: "tokens#log_out"
